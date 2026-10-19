@@ -1,0 +1,85 @@
+@model WebCentralCliente.Models.PagarFacturaPageViewModel
+
+@{
+    ViewBag.Title = "Pagar factura";
+    ViewBag.PageTitle = "Pagar facturas pendientes de pago";
+}
+
+@if (!Model.MostrarFormulario)
+{
+    <div class="panel p-3">
+        <p class="text-muted mb-3">Doble click sobre la línea postpago cuya factura desea cancelar.</p>
+
+        @if (Model.Postpago == null || Model.Postpago.Length == 0)
+        {
+            <div class="alert alert-info">No tiene líneas postpago registradas.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Número de teléfono</th>
+                            <th>Facturación por cancelar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var linea in Model.Postpago)
+                        {
+                            <tr style="cursor:pointer"
+                                ondblclick="location.href='@Url.Action("Index", new { telefono = linea.NumeroTelefono })'">
+                                <td>@linea.NumeroTelefono</td>
+                                <td>@linea.MontoFacturaPendiente.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="panel p-3" style="max-width:520px">
+        <p><strong>Línea:</strong> @Model.Formulario.Telefono</p>
+        <p>
+            <strong>Monto de la factura por cancelar:</strong>
+            @Model.MontoFacturaPendiente.ToString("C")
+        </p>
+        <p class="text-muted small">El monto se carga automáticamente y no puede modificarse.</p>
+
+        @using (Html.BeginForm("Pagar", "PagarFactura", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="Telefono" value="@Model.Formulario.Telefono" />
+
+            <div class="mb-3">
+                <label class="form-label">Número de tarjeta</label>
+                <input type="text" name="NumeroTarjeta" maxlength="19" placeholder="0000-0000-0000" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nombre del dueño de la tarjeta</label>
+                <input type="text" name="NombreTarjeta" class="form-control" />
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <label class="form-label">Mes vencimiento (MM)</label>
+                    <input type="text" name="MesVencimiento" maxlength="2" placeholder="MM" class="form-control" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Año vencimiento (AA)</label>
+                    <input type="text" name="AnioVencimiento" maxlength="2" placeholder="AA" class="form-control" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Código de seguridad</label>
+                <input type="text" name="CodigoSeguridad" maxlength="3" placeholder="CVV" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Pagar</button>
+        }
+
+        <a href="@Url.Action("Index")" class="d-block text-center mt-3">Volver a la lista</a>
+    </div>
+}

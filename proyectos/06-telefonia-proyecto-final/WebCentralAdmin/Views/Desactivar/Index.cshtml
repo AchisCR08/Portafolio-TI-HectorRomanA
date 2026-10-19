@@ -1,0 +1,60 @@
+﻿@model WebCentralAdmin.Infraestructura.LineaEnUsoDTO[]
+
+@{
+    ViewBag.Title = "Devolución de línea";
+    ViewBag.PageTitle = "Devolución de una línea telefónica";
+}
+
+<div class="panel d-flex justify-content-between align-items-center p-3 mb-3">
+    <p class="mb-0 text-muted">Líneas en uso. Al desactivarlas pasan a estado inactivo.</p>
+</div>
+
+@if (Model == null || Model.Length == 0)
+{
+    <div class="alert alert-info">No hay líneas en uso.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Número de teléfono</th>
+                    <th>ID Tarjeta</th>
+                    <th>ID Teléfono</th>
+                    <th>Identificación cliente</th>
+                    <th>Nombre cliente</th>
+                    <th>Tipo de servicio</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var linea in Model)
+                {
+                    <tr>
+                        <td>@linea.NumeroTelefono</td>
+                        <td>@(string.IsNullOrEmpty(linea.IdentificadorTarjeta) ? "-" : linea.IdentificadorTarjeta)</td>
+                        <td>@(string.IsNullOrEmpty(linea.IdentificadorTelefono) ? "-" : linea.IdentificadorTelefono)</td>
+                        <td>@(string.IsNullOrEmpty(linea.IdentificacionCliente) ? "-" : linea.IdentificacionCliente)</td>
+                        <td>@linea.NombreCliente</td>
+                        <td>
+                            <span class="badge text-bg-secondary">@linea.TipoServicio</span>
+                        </td>
+                        <td class="text-end">
+                            <form method="post"
+                                  action="@Url.Action("Desactivar", "Desactivar")"
+                                  onsubmit="return confirm('¿Está seguro que desea desactivar la línea?');">
+                                <input type="hidden" name="numeroTelefonoCifrado" value="@linea.NumeroTelefonoCifrado" />
+                                <input type="hidden" name="identificadorTelefonoCifrado" value="@linea.IdentificadorTelefonoCifrado" />
+                                <input type="hidden" name="identificadorTarjetaCifrado" value="@linea.IdentificadorTarjetaCifrado" />
+                                <input type="hidden" name="tipoServicio" value="@linea.TipoServicio" />
+                                <input type="hidden" name="identificacionClienteCifrado" value="@linea.IdentificacionClienteCifrado" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Desactivar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

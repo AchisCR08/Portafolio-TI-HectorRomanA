@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2>Bienvenido al sistema de administración</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.NombreUsuario))
+{
+    <p>Hola, <strong>@ViewBag.NombreUsuario</strong>.</p>
+}
+
+<p>Utilice el menú lateral para gestionar las líneas telefónicas, la facturación y los usuarios administrativos.</p>

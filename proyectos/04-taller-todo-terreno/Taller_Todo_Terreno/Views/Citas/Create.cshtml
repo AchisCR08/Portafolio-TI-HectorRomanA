@@ -1,0 +1,19 @@
+﻿@model Taller_Todo_Terreno.Models.Cita
+@{
+    ViewData["Title"] = "Solicitar Cita";
+}
+<h1>Solicitar Cita</h1>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label>Vehículo</label>
+        <select asp-for="VehiculoId" class="form-control" asp-items="ViewBag.VehiculoId"></select>
+    </div>
+    <div class="form-group">
+        <label>Horario disponible</label>
+        <select asp-for="HorarioId" class="form-control" asp-items="ViewBag.HorarioId"></select>
+    </div>
+    <br />
+    <input type="submit" value="Reservar cita" class="btn btn-primary" />
+</form>
+<a asp-action="Index">Volver a la lista</a>

@@ -1,0 +1,36 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VSU_State
+bin/
+obj/
+TestResults/
+
+# NuGet
+packages/
+*.nupkg
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Java
+*.class
+target/
+*.jar
+
+# Node
+node_modules/
+
+# Misc
+.DS_Store
+*.log
+.env
+.idea/
+.vscode/

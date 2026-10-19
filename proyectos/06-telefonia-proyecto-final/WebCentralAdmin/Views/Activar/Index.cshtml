@@ -1,0 +1,10 @@
+@model WebCentralAdmin.Infraestructura.LineaDisponibleDTO[]
+@{ ViewBag.Title = "Activar línea"; ViewBag.PageTitle = "Activar una línea recién vendida"; }
+
+@if (Model == null || Model.Length == 0) { <div class="alert alert-info">No hay líneas disponibles para activar.</div> }
+else {
+<div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>Número</th><th>Tarjeta</th><th>Tipo</th><th>Identificador teléfono</th><th>Activar</th></tr></thead><tbody>
+@foreach (var linea in Model) { <tr><td>@linea.NumeroTelefono</td><td>@linea.IdentificadorTarjeta</td><td>@linea.TipoServicio</td><td>@linea.IdentificadorTelefono</td><td>
+<form method="post" action="@Url.Action("Activar")" class="d-flex gap-2">@Html.AntiForgeryToken()<input type="hidden" name="numeroTelefono" value="@linea.NumeroTelefono" /><input type="hidden" name="identificadorTelefono" value="@linea.IdentificadorTelefono" /><input type="hidden" name="identificadorTarjeta" value="@linea.IdentificadorTarjeta" /><input type="hidden" name="tipoServicio" value="@linea.TipoServicio" /><input type="text" name="cedula" class="form-control form-control-sm" maxlength="20" pattern="[0-9]{6,20}" required placeholder="Cédula" /><button class="btn btn-sm btn-primary" type="submit">Activar</button></form>
+</td></tr> }
+</tbody></table></div> }

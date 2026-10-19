@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Taller_Todo_Terreno.Models.Vehiculo>
+@{
+    ViewData["Title"] = "Vehículos";
+}
+<h1>Vehículos</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+<p>
+    <a asp-action="Create">Registrar Vehículo</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Aún no tienes vehículos registrados. <a asp-action="Create">Registra el primero aquí</a>.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Placa)</th>
+                <th>@Html.DisplayNameFor(model => model.Marca)</th>
+                <th>@Html.DisplayNameFor(model => model.Modelo)</th>
+                <th>@Html.DisplayNameFor(model => model.Año)</th>
+                <th>@Html.DisplayNameFor(model => model.TipoTransmision)</th>
+                <th>@Html.DisplayNameFor(model => model.Dueno)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Placa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Marca)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Año)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoTransmision)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dueno.Nombre)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.VehiculoId">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.VehiculoId">Detalle</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VehiculoId">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

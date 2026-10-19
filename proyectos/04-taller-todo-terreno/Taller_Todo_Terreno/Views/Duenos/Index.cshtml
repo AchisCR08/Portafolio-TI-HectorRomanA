@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Taller_Todo_Terreno.Models.Dueno>
+@{
+    ViewData["Title"] = "Dueños";
+}
+<h1>Dueños</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+<p>
+    <a asp-action="Create">Registrar Dueño</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Aún no hay dueños registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Identificacion)</th>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Direccion)</th>
+                <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Identificacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Direccion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.DuenoID">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.DuenoID">Detalle</a> |
+                        <a asp-action="Delete" asp-route-id="@item.DuenoID">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

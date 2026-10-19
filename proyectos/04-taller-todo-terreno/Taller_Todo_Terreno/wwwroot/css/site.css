@@ -1,0 +1,116 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+:root {
+    --taller-azul: #16253c;
+    --taller-naranja: #e8631a;
+}
+/* Navbar */
+.navbar.bg-dark {
+    background-color: var(--taller-azul) !important;
+}
+/* Bloque de bienvenida en Home */
+.taller-hero {
+    background-color: var(--taller-azul);
+    color: white;
+    border-radius: 10px;
+    border-bottom: 5px solid var(--taller-naranja);
+}
+/* Botones oscuros (los que usamos en Home) */
+.btn-dark {
+    background-color: var(--taller-azul);
+    border-color: var(--taller-azul);
+}
+
+    .btn-dark:hover {
+        background-color: var(--taller-naranja);
+        border-color: var(--taller-naranja);
+    }
+/* Botones primarios (los que genera el scaffolding en Create/Edit) */
+.btn-primary {
+    background-color: var(--taller-azul);
+    border-color: var(--taller-azul);
+}
+
+    .btn-primary:hover {
+        background-color: var(--taller-naranja);
+        border-color: var(--taller-naranja);
+    }
+/* Tarjetas */
+.card {
+    border-top: 4px solid var(--taller-naranja);
+}
+/* Encabezados de las tablas (Index de Vehiculos, Duenos, Citas) */
+table thead {
+    background-color: var(--taller-azul);
+    color: white;
+}
+/* Títulos principales de cada página */
+h1 {
+    color: var(--taller-azul);
+}
+/* Links */
+a {
+    color: var(--taller-azul);
+}
+
+    a:hover {
+        color: var(--taller-naranja);
+    }
+/* Fondo general de la página */
+body {
+    background-color: #eef1f5;
+}
+
+footer {
+    background-color: var(--taller-azul) !important;
+    color: white !important;
+}
+
+    footer a {
+        color: #f0f0f0 !important;
+    }
+
+.card, .taller-hero {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Panel tipo dashboard (Home) */
+.panel-card {
+    background-color: white;
+    border-left: 5px solid var(--taller-naranja);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    color: #333;
+}
+
+    .panel-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+.panel-icon {
+    font-size: 2.5rem;
+    color: var(--taller-azul);
+}

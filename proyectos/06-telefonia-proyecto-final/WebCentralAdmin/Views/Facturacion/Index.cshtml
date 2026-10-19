@@ -1,0 +1,51 @@
+﻿@model WebCentralAdmin.Models.FacturacionViewModel
+
+@{
+    ViewBag.Title = "Calcular facturación";
+    ViewBag.PageTitle = "Calcular facturación postpago";
+}
+
+<div class="panel p-4 mb-3">
+    <h5 class="mb-3">Última facturación generada</h5>
+
+    @if (Model.ExisteUltima)
+    {
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Fecha de cálculo</dt>
+            <dd class="col-sm-8">@Model.UltimaFechaCalculo</dd>
+            <dt class="col-sm-4">Fecha máxima de pago</dt>
+            <dd class="col-sm-8">@Model.UltimaFechaMaximaPago</dd>
+        </dl>
+    }
+    else
+    {
+        <p class="text-muted mb-0">No hay facturación previa. Esta será la primera ejecución.</p>
+    }
+</div>
+
+<div class="panel p-4" style="max-width: 560px;">
+    <h5 class="mb-3">Nueva facturación</h5>
+
+    @using (Html.BeginForm("Ejecutar", "Facturacion", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.FechaCalculo, "Fecha de cálculo", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.FechaCalculo, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(m => m.FechaCalculo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-4">
+            @Html.LabelFor(m => m.FechaMaximaPago, "Fecha máxima de pago", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.FechaMaximaPago, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(m => m.FechaMaximaPago, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Ejecutar cálculo</button>
+            <a href="@Url.Action("Index", "Facturacion")" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    }
+</div>

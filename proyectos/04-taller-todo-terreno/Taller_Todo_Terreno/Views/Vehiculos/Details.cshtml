@@ -1,0 +1,106 @@
+﻿@using Taller_Todo_Terreno.Controllers
+@model Taller_Todo_Terreno.Models.Vehiculo
+@{
+    ViewData["Title"] = "Detalle del Vehículo";
+}
+<h1>Detalle del Vehículo</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Placa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Placa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Año)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Año)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoTransmision)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoTransmision)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dueno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dueno.Nombre)
+        </dd>
+    </dl>
+
+    <hr />
+    <h4>Resumen</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Próxima cita</dt>
+        <dd class="col-sm-10">
+            @if (ViewData["ProximaCita"] != null)
+            {
+                var cita = (Taller_Todo_Terreno.Models.Cita)ViewData["ProximaCita"];
+                <span>@cita.Horario.Fecha.ToString("dd 'de' MMMM, yyyy", new System.Globalization.CultureInfo("es-CR")) de @CitasController.FormatearHora(cita.Horario.HoraInicio) a @CitasController.FormatearHora(cita.Horario.HoraFin)</span>
+            }
+            else
+            {
+                <span>No tiene citas programadas</span>
+            }
+        </dd>
+    </dl>
+
+    <h5 class="mt-4">Historial de citas</h5>
+    @{
+        var historial = ViewData["Historial"] as System.Collections.IEnumerable;
+    }
+    @if (historial == null || !historial.Cast<dynamic>().Any())
+    {
+        <p class="text-muted">Este vehículo no tiene citas registradas todavía.</p>
+    }
+    else
+    {
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in historial.Cast<dynamic>())
+                {
+                    <tr>
+                        <td>@item.Cita.Horario.Fecha.ToString("dd/MM/yyyy")</td>
+                        <td>@CitasController.FormatearHora(item.Cita.Horario.HoraInicio)</td>
+                        <td>
+                            @{
+                                string badgeClass = item.EstadoMostrado == "Cancelada" ? "bg-danger"
+                                : item.EstadoMostrado == "Completada" ? "bg-secondary"
+                                : "bg-success";
+                            }
+                            <span class="badge @badgeClass">@item.EstadoMostrado</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.VehiculoId">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

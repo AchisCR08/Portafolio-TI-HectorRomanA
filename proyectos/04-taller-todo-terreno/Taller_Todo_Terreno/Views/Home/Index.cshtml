@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="taller-hero p-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-5 mb-2">Bienvenido a Todo Terreno</h1>
+            <p class="lead mb-0">Gestiona tus vehículos y citas del taller, todo desde un mismo lugar.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="bi bi-wrench-adjustable-circle" style="font-size: 5rem; color: var(--taller-naranja);"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <a asp-controller="Vehiculos" asp-action="Index" class="text-decoration-none">
+            <div class="panel-card p-4 d-flex align-items-center">
+                <i class="bi bi-truck panel-icon"></i>
+                <div class="ms-3">
+                    <h5 class="mb-1">Mis Vehículos</h5>
+                    <p class="mb-0 text-muted">Registra y actualiza tus vehículos</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-controller="Citas" asp-action="Index" class="text-decoration-none">
+            <div class="panel-card p-4 d-flex align-items-center">
+                <i class="bi bi-calendar-check panel-icon"></i>
+                <div class="ms-3">
+                    <h5 class="mb-1">Mis Citas</h5>
+                    <p class="mb-0 text-muted">Agenda o revisa tus citas</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-controller="Duenos" asp-action="Index" class="text-decoration-none">
+            <div class="panel-card p-4 d-flex align-items-center">
+                <i class="bi bi-person-badge panel-icon"></i>
+                <div class="ms-3">
+                    <h5 class="mb-1">Mi Perfil</h5>
+                    <p class="mb-0 text-muted">Consulta tus datos como dueño</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

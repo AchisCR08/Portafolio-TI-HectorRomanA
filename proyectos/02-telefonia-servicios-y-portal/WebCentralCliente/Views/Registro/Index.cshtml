@@ -1,0 +1,76 @@
+﻿@model WebCentralCliente.Models.RegistroViewModel
+
+@{
+    ViewBag.Title = "Registro de cliente";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<section class="auth-card">
+    <div class="auth-brand">
+        <img src="@Url.Content("~/Images/logo.png")" alt="Central General" class="auth-logo" />
+        <div>
+            <p class="auth-kicker">Portal del cliente</p>
+            <h1>Registrarse</h1>
+        </div>
+    </div>
+
+    <p class="auth-copy">Complete sus datos para crear su cuenta de autogestión.</p>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+    {
+        <div class="alert alert-success">@ViewBag.Mensaje</div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    @if (ViewBag.RegistroCompleto == true)
+    {
+        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg w-100">Ir a iniciar sesión</a>
+    }
+    else
+    {
+        @using (Html.BeginForm("Index", "Registro", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="Identificacion">Identificación</label>
+                    <input type="text" id="Identificacion" name="Identificacion" value="@Model?.Identificacion" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="CorreoElectronico">Correo electrónico</label>
+                    <input type="email" id="CorreoElectronico" name="CorreoElectronico" value="@Model?.CorreoElectronico" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="Nombre">Nombre</label>
+                    <input type="text" id="Nombre" name="Nombre" value="@Model?.Nombre" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="PrimerApellido">Primer apellido</label>
+                    <input type="text" id="PrimerApellido" name="PrimerApellido" value="@Model?.PrimerApellido" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="SegundoApellido">Segundo apellido</label>
+                    <input type="text" id="SegundoApellido" name="SegundoApellido" value="@Model?.SegundoApellido" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="Usuario">Usuario</label>
+                    <input type="text" id="Usuario" name="Usuario" value="@Model?.Usuario" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="Contrasena">Contraseña</label>
+                    <input type="password" id="Contrasena" name="Contrasena" class="form-control" />
+                    <div class="form-text">14 caracteres, con mayúscula, minúscula, número y carácter especial.</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Registrarme</button>
+        }
+
+        <p class="auth-copy text-center mt-3 mb-0">
+            ¿Ya tiene cuenta? <a href="@Url.Action("Login", "Account")">Inicie sesión</a>
+        </p>
+    }
+</section>

@@ -1,0 +1,50 @@
+﻿@model WebCentralAdmin.Models.LineaNuevaViewModel
+
+@{
+    ViewBag.Title = "Registrar línea";
+    ViewBag.PageTitle = "Registrar nueva línea telefónica";
+}
+
+<div class="panel p-4" style="max-width: 560px;">
+    @using (Html.BeginForm("Nuevo", "Lineas", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.NumeroTelefono, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.NumeroTelefono, new { @class = "form-control", placeholder = "8 a 15 dígitos" })
+            @Html.ValidationMessageFor(m => m.NumeroTelefono, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.IdentificadorTelefono, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.IdentificadorTelefono, new { @class = "form-control", placeholder = "16 dígitos" })
+            @Html.ValidationMessageFor(m => m.IdentificadorTelefono, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.IdentificadorTarjeta, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.IdentificadorTarjeta, new { @class = "form-control", placeholder = "19 dígitos" })
+            @Html.ValidationMessageFor(m => m.IdentificadorTarjeta, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-4">
+            @Html.LabelFor(m => m.TipoServicio, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.TipoServicio,
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Prepago", Value = "PREPAGO" },
+                    new SelectListItem { Text = "Postpago", Value = "POSTPAGO" }
+                },
+                "-- Seleccione el tipo de servicio --",
+                new { @class = "form-select" })
+            @Html.ValidationMessageFor(m => m.TipoServicio, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a href="@Url.Action("Index", "Lineas")" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    }
+</div>

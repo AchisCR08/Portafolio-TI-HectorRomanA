@@ -1,0 +1,77 @@
+﻿@using WebCentralCliente.Infraestructura
+@{
+    ViewBag.Title = "Mis líneas";
+    ViewBag.PageTitle = "Mostrar líneas activas a mi nombre";
+
+    LineaClienteDTO[] prepago = ViewBag.Prepago;
+    LineaClienteDTO[] postpago = ViewBag.Postpago;
+}
+
+<div class="panel p-3 mb-4">
+    <h5>Líneas prepago</h5>
+    <p class="text-muted mb-3">Doble click sobre una línea para cargar saldo.</p>
+
+    @if (prepago == null || prepago.Length == 0)
+    {
+        <div class="alert alert-info">No tiene líneas prepago registradas.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Número de teléfono</th>
+                        <th>Saldo disponible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var linea in prepago)
+                    {
+                        <tr style="cursor:pointer"
+                            ondblclick="location.href='@Url.Action("Index", "RecargarSaldo", new { telefono = linea.NumeroTelefono })'">
+                            <td>@linea.NumeroTelefono</td>
+                            <td>@linea.Saldo.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<div class="panel p-3">
+    <h5>Líneas postpago</h5>
+    <p class="text-muted mb-3">Doble click sobre una línea con facturación pendiente para pagarla.</p>
+
+    @if (postpago == null || postpago.Length == 0)
+    {
+        <div class="alert alert-info">No tiene líneas postpago registradas.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Número de teléfono</th>
+                        <th>Facturación pendiente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var linea in postpago)
+                    {
+                        bool pendiente = linea.MontoFacturaPendiente > 0;
+                        string urlPago = Url.Action("Index", "PagarFactura", new { telefono = linea.NumeroTelefono });
+                        string estiloFila = pendiente ? "cursor:pointer" : "";
+                        string accionDobleClick = pendiente ? "location.href='" + urlPago + "'" : "";
+                        <tr style="@estiloFila" ondblclick="@accionDobleClick">
+                            <td>@linea.NumeroTelefono</td>
+                            <td>@linea.MontoFacturaPendiente.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

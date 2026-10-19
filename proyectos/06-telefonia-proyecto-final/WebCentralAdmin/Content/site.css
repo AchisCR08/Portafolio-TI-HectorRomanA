@@ -1,0 +1,267 @@
+body {
+    background-color: #f4f6f9;
+    color: #253243;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.cabecera {
+    background-color: #12324a;
+    border-bottom: 4px solid #1f9d8a;
+    color: #ffffff;
+    padding: 14px 24px;
+}
+
+.marca {
+    align-items: center;
+    color: #ffffff;
+    display: inline-flex;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.marca:hover {
+    color: #ffffff;
+}
+
+.titulo-sitio {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo {
+    background-color: #ffffff;
+    border-radius: 8px;
+    height: 48px;
+    object-fit: contain;
+    padding: 4px;
+    width: 48px;
+}
+
+.panel-badge {
+    border-radius: 6px;
+    color: #12324a !important;
+    font-weight: 600;
+}
+
+.admin-shell {
+    min-height: calc(100vh - 126px);
+}
+
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #dbe3ea;
+    padding: 22px 14px;
+}
+
+.sidebar-heading,
+.section-kicker,
+.auth-kicker {
+    color: #607085;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.admin-menu {
+    gap: 6px;
+}
+
+.sidebar .nav-link {
+    border-radius: 8px;
+    color: #24435c;
+    font-weight: 600;
+    line-height: 1.25;
+    padding: 11px 13px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e8f4f2;
+    color: #0c6559;
+}
+
+.sidebar .salir-link {
+    color: #a33b3b;
+    margin-top: 8px;
+}
+
+.sidebar .salir-link:hover {
+    background-color: #fbeaea;
+    color: #842b2b;
+}
+
+.contenido {
+    padding: 28px 32px 40px;
+}
+
+.page-header {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px 22px;
+}
+
+.page-header h1 {
+    color: #12324a;
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.section-kicker {
+    margin-bottom: 4px;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #176b87;
+    border-color: #176b87;
+}
+
+.btn-primary:hover {
+    background-color: #125873;
+    border-color: #125873;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #1f9d8a;
+    box-shadow: 0 0 0 .2rem rgba(31, 157, 138, .16);
+}
+
+.table {
+    background-color: #ffffff;
+    border: 1px solid #dbe3ea;
+}
+
+.table thead th {
+    background-color: #eef4f7;
+    color: #24435c;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.card,
+.panel {
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(18, 50, 74, .06);
+}
+
+.pie-pagina {
+    background-color: #12324a;
+    color: #dbe7ef;
+    padding: 12px 24px;
+    text-align: center;
+}
+
+.pie-pagina p {
+    margin: 0;
+}
+
+.alertas {
+    margin-bottom: 15px;
+}
+
+.auth-body {
+    align-items: center;
+    background:
+        linear-gradient(135deg, rgba(18, 50, 74, .96), rgba(23, 107, 135, .92)),
+        #12324a;
+    display: flex;
+    min-height: 100vh;
+    padding: 32px 16px;
+}
+
+.auth-shell {
+    margin: 0 auto;
+    max-width: 460px;
+    width: 100%;
+}
+
+.auth-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, .24);
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+    padding: 34px;
+}
+
+.auth-brand {
+    align-items: center;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.auth-logo {
+    height: 58px;
+    object-fit: contain;
+    width: 58px;
+}
+
+.auth-brand h1 {
+    color: #12324a;
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.auth-copy {
+    color: #607085;
+    margin-bottom: 22px;
+}
+
+.auth-note {
+    font-size: .92rem;
+}
+
+@media (max-width: 767.98px) {
+    .cabecera {
+        padding: 12px 16px;
+    }
+
+    .panel-badge {
+        display: none;
+    }
+
+    .sidebar {
+        border-bottom: 1px solid #dbe3ea;
+        border-right: 0;
+        min-height: auto;
+    }
+
+    .contenido {
+        padding: 20px 16px 32px;
+    }
+
+    .page-header {
+        padding: 16px;
+    }
+
+    .page-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .auth-card {
+        padding: 26px 20px;
+    }
+}

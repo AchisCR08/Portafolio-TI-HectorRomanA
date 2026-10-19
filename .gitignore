@@ -1,0 +1,16 @@
+.vs/
+**/bin/
+**/obj/
+**/packages/
+**/*.user
+**/*.suo
+**/*.cache
+**/*.pdb
+**/*.dll
+**/*.exe
+**/TestResults/
+.DS_Store
+Thumbs.db
+
+**/target/
+**/bitacora*.txt

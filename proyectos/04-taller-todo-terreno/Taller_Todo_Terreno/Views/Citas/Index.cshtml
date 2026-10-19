@@ -1,0 +1,46 @@
+﻿@using Taller_Todo_Terreno.Controllers
+@model IEnumerable<Taller_Todo_Terreno.Models.Cita>
+@{
+    ViewData["Title"] = "Citas";
+}
+<h1>Citas</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+<p>
+    <a asp-action="Create">Solicitar nueva cita</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Aún no tienes citas programadas. <a asp-action="Create">Solicita una aquí</a>.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Vehículo (Placa)</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Fecha de solicitud</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Vehiculo.Placa</td>
+                    <td>@item.Horario.Fecha.ToString("dd 'de' MMMM, yyyy", new System.Globalization.CultureInfo("es-CR"))</td>
+                    <td>@CitasController.FormatearHora(item.Horario.HoraInicio) - @CitasController.FormatearHora(item.Horario.HoraFin)</td>
+                    <td>@item.FechaSolicitud.ToString("dd/MM/yyyy h:mm tt")</td>
+                    <td><a asp-action="Cancel" asp-route-id="@item.CitaId">Cancelar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
